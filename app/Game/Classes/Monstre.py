@@ -7,3 +7,12 @@ class Monstre(ABC):
 
   def __init__(self):
     print("I am born !")
+
+  @abstractmethod
+  def attaque(self, personnage):
+    """
+
+    :param personnage:
+    :return:
+    """
+    personnage.takeDamage()

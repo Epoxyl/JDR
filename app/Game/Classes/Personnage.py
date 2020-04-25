@@ -5,7 +5,7 @@ class Personnage(ABC):
     """Classe de base pour les personnages"""
     force = 0
     vie = 0
-    race = "humain"
+    raceModifieurs =
 
 
     def __init__(self, nom, race, job, sexe):  ##constructeur
@@ -15,4 +15,4 @@ class Personnage(ABC):
         self.sexe = sexe
 
     def ajustAttributes(self):
-        self.force = 12
+        if self.race in self.raceModifieurs:

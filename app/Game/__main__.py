@@ -1,4 +1,5 @@
 from Game.Classes.Gobelin import Gobelin
+from Game.Classes.Personnage import Personnage
 
 def main():
     """
@@ -8,6 +9,7 @@ def main():
     print("start")
 
     gobelin1 = Gobelin()
-    personnage = Personnage()
 
-    gobelin1.attaque(personnage=personnage)
+    personnage = Personnage("elfe", "chasseur")
+
+    gobelin1.attaque(personnage)

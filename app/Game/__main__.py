@@ -10,6 +10,8 @@ def main():
 
     gobelin1 = Gobelin()
 
-    personnage = Personnage("elfe", "chasseur")
+    personnage = Personnage("Yohann", "Humain", "Magicien")
 
-    gobelin1.attaque(personnage)
+    personnage.action("sortBouleDeFeu", {"target": gobelin1})
+
+    #gobelin1.attaque(personnage)

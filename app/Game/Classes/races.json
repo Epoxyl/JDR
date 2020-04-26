@@ -1,11 +1,13 @@
 {
-  "humain": {
+  "Humain": {
+    "FOR": 1,
+    "CHA": 1
   },
-  "elfe": {
+  "Elfe": {
     "DEX": 2,
     "INT": 2
   },
-  "hobbit": {
+  "Hobbit": {
 
   }
 }

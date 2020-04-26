@@ -8,10 +8,19 @@ import os
 
 class Personnage(ABC):
     """Classe de base pour les personnages"""
-    force = 0
     vie = 0
-    job = "Guerrier"
     caracs = {}
+
+    nom = ""
+    race = ""
+    job = ""
+    sexe = ""
+    force = 0
+    dexterite = 0
+    consistance = 0
+    intelligence = 0
+    sagesse = 0
+    charisme = 0
 
     def __init__(self, nom, race="Humain", job="Magicien", sexe="homme"):  ##constructeur
         self.nom = nom
@@ -59,9 +68,9 @@ class Personnage(ABC):
         :return:
         """
 
-        #module = importlib.import_module("Game.Jobs."+self.job)
-        module = Magicien
-        module_function = getattr(module, action_name)
+        module = importlib.import_module("Game.Classes.Jobs."+self.job)
+        module_class = getattr(module, self.job)
+        module_function = getattr(module_class, action_name)
         if module_function:
             module_function(self, **parameters)
         else:
@@ -71,3 +80,18 @@ class Personnage(ABC):
     def calculateStat(modifieur):
         rand = random.randint(0,1)
         return(10 + modifieur*2+rand)
+
+    def __str__(self):
+        msg = ""
+        msg += "nom : "+str(self.nom)+"\n"
+        msg += "race : "+str(self.race)+"\n"
+        msg += "job : "+str(self.job)+"\n"
+        msg += "sexe : "+str(self.sexe)+"\n"
+        msg += "force : "+str(self.force)+"\n"
+        msg += "dexterite : "+str(self.dexterite)+"\n"
+        msg += "consistance : "+str(self.consistance)+"\n"
+        msg += "intelligence : "+str(self.intelligence)+"\n"
+        msg += "sagesse : "+str(self.sagesse)+"\n"
+        msg += "charisme : "+str(self.charisme)
+
+        return msg

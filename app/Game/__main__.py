@@ -12,6 +12,8 @@ def main():
 
     personnage = Personnage("Yohann", "Humain", "Magicien")
 
+    print(personnage.__str__());
+
     personnage.action("sortBouleDeFeu", {"target": gobelin1})
 
     #gobelin1.attaque(personnage)

@@ -1,6 +1,6 @@
-from abc import ABC, abstractmethod
+from Game.Classes.Entite import Entite
 
-class Monstre(ABC):
+class Monstre(Entite):
   life = 0
   equipement = {
   }

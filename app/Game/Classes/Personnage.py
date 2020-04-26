@@ -11,12 +11,14 @@ class Personnage(ABC):
     force = 0
     vie = 0
     job = "Guerrier"
+    caracs = {}
 
     def __init__(self, nom, race="Humain", job="Magicien", sexe="homme"):  ##constructeur
         self.nom = nom
         self.race = race
         self.job = job
         self.sexe = sexe
+        ## CES VALEURS A DETERMINER DE MANIERE ALEATOIRE
         caracs = {
             "FOR": 1,
             "DEX": 1,
@@ -44,6 +46,7 @@ class Personnage(ABC):
         self.sagesse = self.calculateStat(caracs["SAG"])
         self.charisme = self.calculateStat(caracs["CHA"])
 
+        self.caracs = caracs
         print(caracs)
 
 

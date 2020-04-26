@@ -1,0 +1,5 @@
+ Personnage : | Dragomir Vlad
+ PROFIL | Niveau | RACE | SEXE | AGE | TAILLE | POIDS |
+ Guerrier | 2 |  Humain | Masculin | 25 | 170 | 104 |
+ CARAC. | Valeur | Mod
+ FOR | 17 | +2 |    | AU CONTACT | 12 | 2 |

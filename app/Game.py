@@ -1,5 +1,7 @@
 import os
 from Game.__main__ import main
+#from Tests.__main__ import main
+
 import sys
 
 if __name__ == '__main__':

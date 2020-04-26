@@ -1,4 +1,4 @@
-from Game.Classes.Gobelin import Gobelin
+from Game.Classes.Monstre import Monstre
 from Game.Classes.Personnage import Personnage
 
 def main():
@@ -8,7 +8,7 @@ def main():
     """
     print("start")
 
-    gobelin1 = Gobelin()
+    gobelin1 = Monstre("Errek", "Gobelin", "Homme")
 
     personnage = Personnage("Yohann", "Humain", "Magicien")
 

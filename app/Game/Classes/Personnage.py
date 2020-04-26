@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from Game.Classes.Jobs.Magicien import Magicien
 from Game.Classes.Entite import Entite
 import Game
 import importlib
@@ -9,7 +8,12 @@ import os
 
 class Personnage(Entite):
     """Classe de base pour les personnages"""
+    job = ""
 
+    def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age="25"):
+        self.job = job
+        self.age = age
+        super().__init__(name, race, sexe, "Jouables")
 
     def action(self, action_name, parameters={}):
         """
@@ -22,18 +26,24 @@ class Personnage(Entite):
 
         module = importlib.import_module("Game.Classes.Jobs."+self.job)
         module_class = getattr(module, self.job)
-        module_function = getattr(module_class, action_name)
-        if module_function:
-            return module_function(self, **parameters)
+        action_function = getattr(module_class, action_name)
+        if not action_function:
+            module = importlib.import_module("Game.Classes.Personnage")
+            module_class = getattr(module, "Personnage")
+            action_function = getattr(module_class, action_name)
 
-        module = importlib.import_module("Game.Classes.Personnage")
-        module_class = getattr(module, "Personnage")
-        module_function = getattr(module_class, action_name)
-        if module_function:
-            return module_function(self, **parameters)
+        if action_function:
+            infos_action = getattr(module_class, "infos_"+action_name)
+            difficulte = 0
+            if "target" in parameters.keys():
+                target = parameters["target"]
+                if type(target).__name__ == "Entite":
+                    difficulte = target.defense
+            if not difficulte:
+                difficulte = infos_action["difficulte"]
 
-    def takeDamage(self, damage):
-        self.vie -= damage
+            result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
+            action_function(self, **parameters)
 
     def getModifieur(self, name_val):
         return self.caracs[name_val]

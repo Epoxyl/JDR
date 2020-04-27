@@ -51,43 +51,52 @@ class Personnage(Entite):
       result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
       action_function(self, **parameters)
 
-  def setEquipement(self, equipement, emplacement_voulu = "", deux_mains=False):
-    print("set equip")
+
+  def setEquipement(self, equipement, emplacement_voulu="", deux_mains=False):
+    """
+    Ajoute un equipement
+    :param equipement:
+    :param emplacement_voulu: clef du tableau Entite.equipements
+    :param deux_mains: Permet de s'équiper de l'arme à deux mains
+    :return:
+    """
     if not emplacement_voulu:
       emplacement_voulu = equipement.emplacement
 
-    if emplacement_voulu == "MAIN":
-      if not self.equipements["MAIN1"]:
-        self.equipements["MAIN1"] = equipement
+    if "MAIN" in emplacement_voulu:
+      if self.equipements["MAIN1"] and deux_mains:
+        return self.replaceEquipement(equipement, "MAIN2")
+
+      if emplacement_voulu == "MAIN":
+        emplacement_voulu+="1"
+      return self.replaceEquipement(equipement, emplacement_voulu)
       ## Double main et remplacement d'arme à gérer
 
     if emplacement_voulu in self.equipements.keys():
-      return self.replaceEquipement(equipement)
+      return self.replaceEquipement(equipement, emplacement_voulu)
 
     if emplacement_voulu not in self.equipements.keys():
       # Emplacement erroné
       return False
 
-
-
-
   def replaceEquipement(self, equipement, emplacement=""):
-    print("replace"+equipement)
+    print("place/replace "+equipement.__str__())
     if not emplacement:
       emplacement = equipement.emplacement
-
     if emplacement in self.equipements.keys():
       old_equipement = self.equipements[emplacement]
     else:
-      # emplecement erroné !
+      print("emplecement erroné !")
       return False
+
     self.equipements[emplacement] = equipement
     if old_equipement:
-      return self.storeObject(old_equipement, 1)
+      return self.storeObject(old_equipement)
     return True
 
-  def storeObject(self, objet, nombre):
-    print("Ajoute "+objet)
+  def storeObject(self, objet):
+    print("Ajoute "+objet.__str__())
+    self.inventaire[objet.nom] = objet
     return True
 
   def getModifieur(self, name_val):
@@ -117,8 +126,12 @@ class Personnage(Entite):
           msg += "(D)"
         elif partie == "MAIN2":
           msg += "(G)"
+        msg += "\n"
     msg += "\n"
-
+    msg += "Inventaire : \n"
+    for objet in self.inventaire.keys():
+      msg += self.inventaire[objet].__str__()
+    msg += "\n"
     msg += "force : " + str(self.force) + "\n"
     msg += "dexterite : " + str(self.dexterite) + "\n"
     msg += "consistance : " + str(self.consistance) + "\n"

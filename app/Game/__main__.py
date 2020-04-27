@@ -15,7 +15,12 @@ def main():
 
     epeeDebatard = Epee("Epee de batard")
 
-    personnage.setEquipement(epeeDebatard)
+    print(personnage.setEquipement(epeeDebatard))
+
+    epee2 = Epee("Epee de la rue")
+    print(personnage.setEquipement(deux_mains=True, equipement=epee2))
+    epee3 = Epee("Epee de la mort")
+    print(personnage.setEquipement(emplacement_voulu="MAIN2", equipement=epee3))
 
     print(personnage.toString())
 

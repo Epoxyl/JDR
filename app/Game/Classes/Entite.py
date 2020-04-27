@@ -21,6 +21,7 @@ class Entite(ABC):
   equipements = {
     "TETE": None, "MAIN1": None, "MAIN2": None, "CORPS": None, "JAMBES": None
   }
+  inventaire = {}
 
   def __init__(self, nom, race="Humain", sexe="homme", type="Jouable"):  ##constructeur
     self.nom = nom

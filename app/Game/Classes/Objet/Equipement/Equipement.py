@@ -10,11 +10,17 @@ class Equipement(ABC):
   nom=""
   prix=0
   description=""
+  emplacement = ""
+  double_mains = False
 
-  def __init__(self,nom,prix,description,durabilite,poids):
+  def __init__(self, nom, prix, description, durabilite, poids, emplacement):
     self.nom = nom
     self.prix = prix
     self.descritpion = description
     self.durabilite=durabilite
     self.poids=poids
+    self.emplacement = emplacement
 
+  def __str__(self):
+    msg = self.nom
+    return msg

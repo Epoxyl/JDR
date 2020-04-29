@@ -1,5 +1,6 @@
-#from Tests.testWidget import test
-from Tests.testCrypto import *
+#from Tests.testCrypto import *
+from Tests.testWidget import test
 
 def main():
   test()
+  ##test2()

@@ -8,7 +8,8 @@ import os
 
 class Personnage(Entite):
   """Classe de base pour les personnages"""
-  job = ""
+
+  job = None
 
   def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age="25"):
     self.job = job
@@ -80,6 +81,12 @@ class Personnage(Entite):
       return False
 
   def replaceEquipement(self, equipement, emplacement=""):
+    """
+    Remplace un équipement et place le précédent equipement dans l'inventaire
+    :param equipement:
+    :param emplacement:
+    :return:
+    """
     print("place/replace "+equipement.__str__())
     if not emplacement:
       emplacement = equipement.emplacement
@@ -95,12 +102,22 @@ class Personnage(Entite):
     return True
 
   def storeObject(self, objet):
+    """
+    Place un objet dans l'inventaire
+    :param objet:
+    :return:
+    """
     print("Ajoute "+objet.__str__())
     self.inventaire[objet.nom] = objet
     return True
 
-  def getModifieur(self, name_val):
-    return self.caracs[name_val]
+  def getModifieur(self, type):
+    """
+    Récupère le modifieur d'un type
+    :param type: type du modifieur (exemple FOR)
+    :return:
+    """
+    return self.caracs[type]
 
   @staticmethod
   def calculateStat(modifieur):
@@ -108,15 +125,15 @@ class Personnage(Entite):
     return (10 + modifieur * 2 + rand)
 
   def __str__(self):
-    msg = self.nom + "({})".format(self.job)
-
+    msg = self.nom + "({})".format(self.job)+"\n"
+    msg += str(self.vie) + "PV"
     return msg
 
   def toString(self):
     msg = ""
     msg += "nom : " + str(self.nom) + "\n"
     msg += "race : " + str(self.race) + "\n"
-    msg += "job : " + str(self.job) + "\n"
+    msg += "job : " + self.job + "\n"
     msg += "sexe : " + str(self.sexe) + "\n"
     msg += "\n"
     for partie in self.equipements.keys():

@@ -12,9 +12,23 @@ class Personnage(Entite):
   job = None
 
   def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age="25"):
-    self.job = job
+    module = importlib.import_module("Game.Classes.Jobs." + job)
+    module_class = getattr(module, job)
+    self.job = module_class()
     self.age = age
-    super().__init__(name, race, sexe, "Jouables")
+    self.vie = self.job.getVie()
+    super().__init__(name, race, sexe, type="Jouables")
+
+  def setDefaultAttack(self, defaultAttack=""):
+    if not defaultAttack:
+      functions = self.job.getFunctions()
+      print(functions)
+      defaultAttack_string = functions[0][1]
+      self.defaultAttack = getattr(self.job, defaultAttack_string)
+    else:
+      defaultAttack = getattr(self.job, defaultAttack)
+      self.defaultAttack = defaultAttack
+      ### Faire le cas où l'action est dans les equipements/races
 
   def action(self, action_name, parameters={}):
     """
@@ -25,13 +39,14 @@ class Personnage(Entite):
     :return:
     """
 
-    module = importlib.import_module("Game.Classes.Jobs." + self.job)
-    module_class = getattr(module, self.job)
-    action_function = getattr(module_class, action_name)
-    if not action_function:
-      module = importlib.import_module("Game.Classes.Personnage")
-      module_class = getattr(module, "Personnage")
-      action_function = getattr(module_class, action_name)
+    functions = self.job.getFunctions()
+    print(functions)
+    #module_class = getattr(module, self.job)
+    #action_function = getattr(module_class, action_name)
+    #if not action_function:
+    #  module = importlib.import_module("Game.Classes.Personnage")
+    #  module_class = getattr(module, "Personnage")
+    #  action_function = getattr(module_class, action_name)
 
     # for equipement in self.equipements:
     #   module_class = type(equipement)
@@ -39,18 +54,19 @@ class Personnage(Entite):
     #    if action_function:
     #      pass
     #
-    if action_function:
-      infos_action = getattr(module_class, "infos_" + action_name)
-      difficulte = 0
-      if "target" in parameters.keys():
-        target = parameters["target"]
-        if type(target).__name__ == "Entite":
-          difficulte = target.defense
-      if not difficulte and "difficulte" in infos_action.keys():
-        difficulte = infos_action["difficulte"]
+   #if action_function:
+   #  infos_action = getattr(module_class, "infos_" + action_name)
+   #  difficulte = 0
+   #  if "target" in parameters.keys():
+   #    target = parameters["target"]
+   #    if type(target).__name__ == "Entite":
+   #      difficulte = target.defense
+   #  if not difficulte and "difficulte" in infos_action.keys():
+   #    difficulte = infos_action["difficulte"]
 
-      result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
-      action_function(self, **parameters)
+   #  result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
+   #  action_function(self, **parameters)
+
 
 
   def setEquipement(self, equipement, emplacement_voulu="", deux_mains=False):

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import random
 import json
+import importlib
 import Game
 
 class Entite(ABC):
@@ -10,7 +11,7 @@ class Entite(ABC):
   caracs = {}
 
   nom = ""
-  race = ""
+  race = None
   sexe = ""
   force = 0
   dexterite = 0
@@ -18,14 +19,19 @@ class Entite(ABC):
   intelligence = 0
   sagesse = 0
   charisme = 0
+  initiative = 0
+  defaultAttack = None
   equipements = {
     "TETE": None, "MAIN1": None, "MAIN2": None, "CORPS": None, "JAMBES": None
   }
   inventaire = {}
 
-  def __init__(self, nom, race="Humain", sexe="homme", type="Jouable"):  ##constructeur
+  def __init__(self, nom, race="Humain", sexe="homme", type="Jouables"):  ##constructeur
     self.nom = nom
-    self.race = race
+    module = importlib.import_module("Game.Classes.Races." + type + "." + race)
+    module_class = getattr(module, race)
+    self.race = module_class()
+    self.setDefaultAttack()
     self.sexe = sexe
     self.type = type
     ## CES VALEURS A DETERMINER DE MANIERE ALEATOIRE
@@ -43,7 +49,7 @@ class Entite(ABC):
     # Ajout des modificateurs de races, présents dans races_Jouables.json
     with open(directory + "/Classes/Races/races_"+self.type+".json") as races_modifieurs:
       modifieurs_races = json.load(races_modifieurs)
-    modifieurs_race = modifieurs_races[self.race]
+    modifieurs_race = modifieurs_races[race]
 
     for name_cara in ["FOR", "DEX", "CON", "INT", "SAG", "CHA"]:
       if name_cara in modifieurs_race:
@@ -78,7 +84,27 @@ class Entite(ABC):
       # Echec Classique
       return 0
 
+  def testType(self, type, modifieurs=0):
+    jet_de = random.randint(1, 20)
+    return jet_de + self.caracs[type] + modifieurs
+
   @staticmethod
   def calculateStat(modifieur):
       rand = random.randint(0,1)
       return(10 + modifieur*2+rand)
+
+  def tourCombat(self, combat, joueur_informations):
+    """
+    Action d'un tour de combat avec le personnage
+    :param combat: instance de Combat
+    :param joueur_informations:
+    :return:
+    """
+    action_combat = "Attaquer"
+    if action_combat == "Attaquer":
+      ennemis = combat.getEnnemies(joueur_informations)
+      #### ICI POUR CHOISIR L'ennemi
+      ennemy_chosen = ennemis[0]
+      ##### ICI POUR CHOISIR l'action
+      attaque = self.defaultAttack
+      attaque(self, ennemy_chosen)

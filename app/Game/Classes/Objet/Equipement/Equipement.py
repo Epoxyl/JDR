@@ -4,7 +4,6 @@ import Game
 
 
 class Equipement(ABC):
-
   durabilite=0
   poids=0
   nom=""
@@ -24,3 +23,8 @@ class Equipement(ABC):
   def __str__(self):
     msg = self.nom
     return msg
+
+  def defaultAttack(self, Character, target):
+    print("defaultAttack")
+    degats = 4
+    target.takeDamage(degats)

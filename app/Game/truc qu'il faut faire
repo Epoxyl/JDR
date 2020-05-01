@@ -5,4 +5,11 @@
 
 -Modifier les equipements comme pour Epee.py
 
+-Utiliser un tableau dans Combat.py pour les positions de joueurs
+-Ajouter les états de combat (étourdi, paralysé,...)
+-Ajouter les différentes actions d'un combat (Esquiver, se cacher, ...)
+-Mieux gérer l'action par défaut
+
+-Utiliser les actions (Job/Races) dans un fichier à part, ou en dehors de la classe, et elles sont importées suivant le rang du Job
+
 -Utiliser pyCharm pour créer automatiquement certaines classes par défaut

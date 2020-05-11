@@ -21,7 +21,7 @@ class Personnage(Entite):
 
   def setDefaultAttack(self, defaultAttack=""):
     if not defaultAttack:
-      functions = self.job.getFunctions()
+      functions = self.job.getFunctions()                                ####### L'ENIGME DU COMMIT
       print(functions)
       defaultAttack_string = functions[0][1]
       self.defaultAttack = getattr(self.job, defaultAttack_string)

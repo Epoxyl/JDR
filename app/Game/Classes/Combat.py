@@ -43,7 +43,7 @@ class Combat():
       if (len(alive_players_by_group)):
         alive_teams += 1
 
-    return alive_teams >= 1
+    return alive_teams > 1
 
 
 def checkTeamAlive(groupe):

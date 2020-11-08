@@ -13,3 +13,7 @@
 -Utiliser les actions (Job/Races) dans un fichier à part, ou en dehors de la classe, et elles sont importées suivant le rang du Job
 
 -Utiliser pyCharm pour créer automatiquement certaines classes par défaut
+
+- user actions : chaque utilisateur envoie la commande au "serveur". Interface web pour les actions qui seront formulées sous forme de commande
+
+-ROGUE-LIKE RPG (dungeon crawler ?)

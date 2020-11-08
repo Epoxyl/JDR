@@ -1,7 +1,7 @@
 class Combat():
   continue_combat = True
   nombre_groupes = 0
-  JoueursByInit = {}
+  JoueursByInit = []
 
   def __init__(self, groupes):
     self.nombre_groupes = len(groupes)

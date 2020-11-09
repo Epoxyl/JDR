@@ -7,7 +7,7 @@ from Game import game_directory
 class Entite(ABC):
   type = ""
 
-  vie = 0
+  vie = 100
   caracs = {}
 
   nom = ""
@@ -61,10 +61,24 @@ class Entite(ABC):
     self.charisme = self.calculateStat(caracs["CHA"])
 
     self.caracs = caracs
-    print(caracs)
+    #print(caracs)
 
   def takeDamage(self, damage):
       self.vie -= damage
+
+  def getActions(self, type="", name="", only_names=False, with_function = False):
+    """
+    Récupère les actions possibles suivant le type et le nom
+    :param string type: Type d'utilisation
+    :param string name: Nom de l'action
+    :param bool only_names: retourne uniquement les noms des actions (pour l'affichage)
+    :return actions:
+    """
+    actions_race = self.race.getActions(type, name, only_names, with_function)
+
+    #todo : actions_equipements
+
+    return actions_race
 
   def testAction(self, type, difficulte, modifieurs=0):
     jet_de = random.randint(1, 20)

@@ -22,7 +22,10 @@ def main():
 
     combat = Combat([troupeAventuriers, ennemis])
 
-    combat.combat()
+    personnage.action("sortBouleDeFeu", gobelin1)
+    print(gobelin1.vie)
+    print(personnage.getActions(only_names=True, type="combat"))
+    #combat.combat()
 
     #epeeDebatard = Epee("Epee de batard")
 #

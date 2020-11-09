@@ -1,10 +1,15 @@
 from Game.Classes.Races.Races import Race
 
 class Gobelin(Race):
+  nom = "Gobelin"
   initiative = 11
-  actions = [
-    [0, "attaqueRapide", "FOR", True, ]
-  ]
+  actions_race = {
+    "attaqueRapide": {
+      "type": "FOR",
+      "active": True,
+      "use": ["combat"]
+    }
+  }
 
   @staticmethod
   def attaqueRapide(Character, target):

@@ -11,15 +11,8 @@ class Monstre(Entite):
     super().__init__(nom=nom, race=race, sexe=sexe, type="Mobs")
 
   def setDefaultAttack(self, defaultAttack=""):
-    if not defaultAttack:
-      functions = self.race.getFunctions()
-      print(functions)
-      defaultAttack_string = functions[0][1]
-      self.defaultAttack = getattr(self.race, defaultAttack_string)
-    else:
-      defaultAttack = getattr(self.job, defaultAttack)
-      self.defaultAttack = defaultAttack
-      ### Faire le cas où l'action est dans les equipements/races
+    actions = self.getActions(only_names=True, type="combat", name=defaultAttack)                                ####### L'ENIGME DU COMMIT
+    self.defaultAttack = actions[0]
 
   def action(self, action_name, parameters={}):
       """
@@ -31,7 +24,7 @@ class Monstre(Entite):
       """
 
       module = importlib.import_module("Game.Classes.Races.Mobs."+self.race)
-      module_class = getattr(module, self.job)
+      module_class = getattr(module, self.race)
       module_function = getattr(module_class, action_name)
       if module_function:
           return module_function(self, **parameters)

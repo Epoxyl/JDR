@@ -1,9 +1,14 @@
 from Game.Classes.Races.Races import Race
 
 class Elfe(Race):
-  actions = [
-    [0, "tirArc", "FOR", True]
-  ]
+  nom = "Elfe"
+  actions_race = {
+    "tirArc": {
+      "type": "FOR",
+      "active": True,
+      "use": ["combat"]
+    }
+  }
 
   def tirArc(Character, target):
     print(target)

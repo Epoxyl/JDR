@@ -28,3 +28,5 @@ class Equipement(ABC):
     print("defaultAttack")
     degats = 4
     target.takeDamage(degats)
+
+  # todo : getActions

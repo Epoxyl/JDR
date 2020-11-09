@@ -21,28 +21,41 @@ class Personnage(Entite):
 
   def setDefaultAttack(self, defaultAttack=""):
     if not defaultAttack:
-      functions = self.job.getFunctions()                                ####### L'ENIGME DU COMMIT
-      print(functions)
-      defaultAttack_string = functions[0][1]
+      actions = self.getActions(only_names=True, type="combat")                                ####### L'ENIGME DU COMMIT
+      print(actions)
+      defaultAttack_string = actions[0]
       self.defaultAttack = getattr(self.job, defaultAttack_string)
     else:
+
       defaultAttack = getattr(self.job, defaultAttack)
       self.defaultAttack = defaultAttack
       ### Faire le cas où l'action est dans les equipements/races
+      print(self.defaultAttack)
 
   def action(self, action_name, parameters={}):
     """
     example : personnage1.action("sortBouleDeFeu")
+    Vérifie s'il a le droit de faire l'action
 
     :param action_name:
     :param parameters:
     :return:
     """
 
-    functions = self.job.getFunctions()
-    print(functions)
-    #module_class = getattr(module, self.job)
-    #action_function = getattr(module_class, action_name)
+    if not action_name:
+      return
+
+    if not isinstance(parameters, list):
+      print("here")
+      parameters = {parameters}
+    print(parameters)
+    print(type(self))
+    actions = self.getActions(name=action_name, only_names=True, with_function=True)
+    action = actions[0]
+    print(action)
+    action_function = action[2]
+    object = action[1]
+    action_function(object, *parameters)
     #if not action_function:
     #  module = importlib.import_module("Game.Classes.Personnage")
     #  module_class = getattr(module, "Personnage")
@@ -67,7 +80,17 @@ class Personnage(Entite):
    #  result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
    #  action_function(self, **parameters)
 
+  def getActions(self, type="", name="", only_names=False, with_function = False):
+    """
+    Récupère les actions possibles suivant le type et le nom
+    :param string type: Type d'utilisation
+    :param string name: Nom de l'action
+    :param bool only_names: retourne uniquement les noms des actions (pour l'affichage)
+    :return actions:
+    """
+    actions_job = self.job.getActions(type, name, only_names, with_function)
 
+    return actions_job + super().getActions(type, name, only_names, with_function)
 
   def setEquipement(self, equipement, emplacement_voulu="", deux_mains=False):
     """

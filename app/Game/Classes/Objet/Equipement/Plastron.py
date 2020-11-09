@@ -1,4 +1,4 @@
-from Game.Classes.Objet.Equipement.Equipement import Equipement
+from Classes.Objet.Equipement.Equipement import Equipement
 
 
 class Plastron(Equipement):

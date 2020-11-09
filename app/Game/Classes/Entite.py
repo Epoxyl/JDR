@@ -28,7 +28,8 @@ class Entite(ABC):
 
   def __init__(self, nom, race="Humain", sexe="homme", type="Jouables"):  ##constructeur
     self.nom = nom
-    module = importlib.import_module("Game.Classes.Races." + type + "." + race)
+    print("Classes.Races." + type + "." + race)
+    module = importlib.import_module("Classes.Races." + type + "." + race)
     module_class = getattr(module, race)
     self.race = module_class()
     self.setDefaultAttack()

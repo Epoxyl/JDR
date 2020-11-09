@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Game.Classes.Entite import Entite
+from Classes.Entite import Entite
 import Game
 import importlib
 import random
@@ -12,7 +12,7 @@ class Personnage(Entite):
   job = None
 
   def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age="25"):
-    module = importlib.import_module("Game.Classes.Jobs." + job)
+    module = importlib.import_module("Classes.Jobs." + job)
     module_class = getattr(module, job)
     self.job = module_class()
     self.age = age
@@ -44,7 +44,7 @@ class Personnage(Entite):
     #module_class = getattr(module, self.job)
     #action_function = getattr(module_class, action_name)
     #if not action_function:
-    #  module = importlib.import_module("Game.Classes.Personnage")
+    #  module = importlib.import_module("Classes.Personnage")
     #  module_class = getattr(module, "Personnage")
     #  action_function = getattr(module_class, action_name)
 

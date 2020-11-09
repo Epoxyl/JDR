@@ -1,7 +1,7 @@
-from Classes.Monstre import Monstre
-from Classes.Personnage import Personnage
-from Classes.Objet.Equipement.Epee import Epee
-from Classes.Combat import Combat
+from Game.Classes.Monstre import Monstre
+from Game.Classes.Personnage import Personnage
+from Game.Classes.Objet.Equipement.Epee import Epee
+from Game.Classes.Combat import Combat
 
 def main():
     """

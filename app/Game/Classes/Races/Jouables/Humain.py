@@ -1,4 +1,4 @@
-from Classes.Races.Races import Race
+from Game.Classes.Races.Races import Race
 
 class Humain(Race):
   actions = [

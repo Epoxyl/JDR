@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import random
 import json
 import importlib
-import Game
+from Game import game_directory
 
 class Entite(ABC):
   type = ""
@@ -28,8 +28,7 @@ class Entite(ABC):
 
   def __init__(self, nom, race="Humain", sexe="homme", type="Jouables"):  ##constructeur
     self.nom = nom
-    print("Classes.Races." + type + "." + race)
-    module = importlib.import_module("Classes.Races." + type + "." + race)
+    module = importlib.import_module("Game.Classes.Races." + type + "." + race)
     module_class = getattr(module, race)
     self.race = module_class()
     self.setDefaultAttack()
@@ -45,10 +44,8 @@ class Entite(ABC):
       "CHA": 2
     }
 
-    directory = Game.directory
-
     # Ajout des modificateurs de races, présents dans races_Jouables.json
-    with open(directory + "/Classes/Races/races_"+self.type+".json") as races_modifieurs:
+    with open(game_directory + "/Classes/Races/races_"+self.type+".json") as races_modifieurs:
       modifieurs_races = json.load(races_modifieurs)
     modifieurs_race = modifieurs_races[race]
 

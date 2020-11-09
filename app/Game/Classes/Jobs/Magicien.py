@@ -1,4 +1,4 @@
-from Classes.Jobs.Jobs import Job
+from Game.Classes.Jobs.Jobs import Job
 
 class Magicien(Job):
   deVie = 6

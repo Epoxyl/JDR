@@ -1,4 +1,4 @@
-from Classes.Objet.Equipement.Equipement import Equipement
+from Game.Classes.Objet.Equipement.Equipement import Equipement
 
 
 class Heaume(Equipement):

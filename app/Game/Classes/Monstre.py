@@ -1,4 +1,4 @@
-from Classes.Entite import Entite
+from Game.Classes.Entite import Entite
 from abc import ABC, abstractmethod
 import importlib
 class Monstre(Entite):
@@ -30,7 +30,7 @@ class Monstre(Entite):
       :return:
       """
 
-      module = importlib.import_module("Classes.Races.Mobs."+self.race)
+      module = importlib.import_module("Game.Classes.Races.Mobs."+self.race)
       module_class = getattr(module, self.job)
       module_function = getattr(module_class, action_name)
       if module_function:

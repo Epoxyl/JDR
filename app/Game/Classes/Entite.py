@@ -3,8 +3,9 @@ import random
 import json
 import importlib
 from Game import game_directory
+from Game.Classes.World.Actors.Actor import Actor
 
-class Entite(ABC):
+class Entite(Actor):
   type = ""
 
   vie = 100
@@ -26,7 +27,14 @@ class Entite(ABC):
   }
   inventaire = {}
 
-  def __init__(self, nom, race="Humain", sexe="homme", type="Jouables"):  ##constructeur
+  def __init__(self, nom, race="Humain", sexe="homme", type="Jouables", position=[0,0]):  ##constructeur
+    """
+    :param str nom:
+    :param str race:
+    :param str sexe:
+    :param str type:
+    """
+
     self.nom = nom
     module = importlib.import_module("Game.Classes.Races." + type + "." + race)
     module_class = getattr(module, race)
@@ -62,6 +70,8 @@ class Entite(ABC):
 
     self.caracs = caracs
     #print(caracs)
+
+    super().__init__(position)
 
   def takeDamage(self, damage):
       self.vie -= damage
@@ -120,3 +130,7 @@ class Entite(ABC):
       ##### ICI POUR CHOISIR l'action
       attaque = self.defaultAttack
       attaque(self, ennemy_chosen)
+
+  @abstractmethod
+  def setDefaultAttack(self):
+    pass

@@ -2,6 +2,9 @@ from Game.Classes.Monstre import Monstre
 from Game.Classes.Personnage import Personnage
 from Game.Classes.Objet.Equipement.Epee import Epee
 from Game.Classes.Combat import Combat
+from Game.Classes.World.Actors.Meubles.Chaise import Chaise
+from Game.Levels.Prison import Prison
+
 
 def main():
     """
@@ -27,6 +30,10 @@ def main():
     print(personnage.getActions(only_names=True, type="combat"))
     #combat.combat()
 
+    #chaise = Chaise([2,2])
+    level = Prison(7,20)
+
+    level.displayScnene()
     #epeeDebatard = Epee("Epee de batard")
 #
     #print(personnage.setEquipement(epeeDebatard))

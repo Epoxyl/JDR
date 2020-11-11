@@ -11,13 +11,22 @@ class Personnage(Entite):
 
   job = None
 
-  def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age="25"):
+  def __init__(self, name="", race="Humain", job="Guerrier", sexe="Homme", age=25, position=[0,0]):
+    """
+
+    :param str name:
+    :param str race:
+    :param str job:
+    :param str sexe:
+    :param int age:
+    :param position:
+    """
     module = importlib.import_module("Game.Classes.Jobs." + job)
     module_class = getattr(module, job)
     self.job = module_class()
     self.age = age
     self.vie = self.job.getVie()
-    super().__init__(name, race, sexe, type="Jouables")
+    super().__init__(name, race, sexe, "Jouables", position)
 
   def setDefaultAttack(self, defaultAttack=""):
     if not defaultAttack:

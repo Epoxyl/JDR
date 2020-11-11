@@ -17,3 +17,8 @@
 - user actions : chaque utilisateur envoie la commande au "serveur". Interface web pour les actions qui seront formulées sous forme de commande
 
 -ROGUE-LIKE RPG (dungeon crawler ?)
+
+- Jeu style Baldur's gate
+-> "Scene" représentant une partie de map. Une pièce de donjon, un village, un champs,...
+    -> Importe uniquement les classes dont elle a besoin
+    -> Contient La liste des Acteurs/GroupeActeurs avec lesquels les joueurs peuvent intéragir

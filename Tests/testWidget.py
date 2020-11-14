@@ -37,6 +37,9 @@ def test():
   print(multiple)
 
   root = Tk()  # Création de la fenêtre racine
+  
+
+
   for line in range(len(tab)):
     frame = Frame(root)
     length = len(tab[line])
@@ -50,6 +53,34 @@ def test():
       label = Label(root, text=str(col)+tab[line][case])
       label.grid(column=case, row=line)
 
+  ### bordure
+  # cadre = Frame(fenetre, width=768, height=576, borderwidth=1)
+  # cadre.pack(fill=BOTH)
+  # message = Label(cadre, text="Notre fenêtre")
+  # message.pack(side="top", fill=X)
+
+  """Premier exemple avec Tkinter.
+
+  On crée une fenêtre simple qui souhaite la bienvenue à l'utilisateur.
+
+  # On importe Tkinter
+  from tkinter import *
+
+  # On crée une fenêtre, racine de notre interface
+  fenetre = Tk()
+
+  # On crée un label (ligne de texte) souhaitant la bienvenue
+  # Note : le premier paramètre passé au constructeur de Label est notre
+  # interface racine
+  champ_label = Label(fenetre, text="Salut les Zér0s !")
+
+  # On affiche le label dans la fenêtre
+  champ_label.pack()
+
+  # On démarre la boucle Tkinter qui s'interompt quand on ferme la fenêtre
+  fenetre.mainloop()
+  
+  """
 
   #label = Label(root, text='Personnage |')
   #label2 = Label(root, text=nom+" "+prenom)

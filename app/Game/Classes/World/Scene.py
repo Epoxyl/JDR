@@ -1,4 +1,5 @@
 from Game.Classes.World.Actors.Actor import Actor
+from Game.Controller.UserActions import characterHUD
 from Game import game_directory
 
 class Scene():
@@ -51,7 +52,8 @@ class Scene():
     """
     if not asking_actor:
       asking_actor = self.player
-
+    characterHUD(self.player, self)
+    return
     with open(game_directory+"/Levels/Prison/Scenes/{}_description.txt".format(self.name.lower()), 'r') as fp:
       for line in fp:
         if line == "\n":
@@ -95,7 +97,7 @@ class Scene():
       line += "|\n"
       msg += line
     msg += " " + "_" * self.largeur + "\n"
-    print(msg)
+    return (msg)
 
   def getActors(self, with_position=False, only_position=False):
     if only_position:

@@ -6,6 +6,9 @@ import random
 import json
 import os
 
+from Game.Utils.Manipulations import dict_merge
+
+
 class Personnage(Entite):
   """Classe de base pour les personnages"""
 
@@ -32,7 +35,7 @@ class Personnage(Entite):
     if not defaultAttack:
       actions = self.getActions(only_names=True, type="combat")                                ####### L'ENIGME DU COMMIT
       print(actions)
-      defaultAttack_string = actions[0]
+      defaultAttack_string = list(actions.keys())[0]
       self.defaultAttack = getattr(self.job, defaultAttack_string)
     else:
 
@@ -40,54 +43,6 @@ class Personnage(Entite):
       self.defaultAttack = defaultAttack
       ### Faire le cas où l'action est dans les equipements/races
       print(self.defaultAttack)
-
-  def action(self, action_name, parameters={}):
-    """
-    example : personnage1.action("sortBouleDeFeu")
-    Vérifie s'il a le droit de faire l'action
-
-    :param action_name:
-    :param parameters:
-    :return:
-    """
-
-    if not action_name:
-      return
-
-    if not isinstance(parameters, list):
-      print("here")
-      parameters = {parameters}
-    print(parameters)
-    print(type(self))
-    actions = self.getActions(name=action_name, only_names=True, with_function=True)
-    action = actions[0]
-    print(action)
-    action_function = action[2]
-    object = action[1]
-    action_function(object, *parameters)
-    #if not action_function:
-    #  module = importlib.import_module("Game.Classes.Personnage")
-    #  module_class = getattr(module, "Personnage")
-    #  action_function = getattr(module_class, action_name)
-
-    # for equipement in self.equipements:
-    #   module_class = type(equipement)
-    #    action_function = getattr(module_class, action_name)
-    #    if action_function:
-    #      pass
-    #
-   #if action_function:
-   #  infos_action = getattr(module_class, "infos_" + action_name)
-   #  difficulte = 0
-   #  if "target" in parameters.keys():
-   #    target = parameters["target"]
-   #    if type(target).__name__ == "Entite":
-   #      difficulte = target.defense
-   #  if not difficulte and "difficulte" in infos_action.keys():
-   #    difficulte = infos_action["difficulte"]
-
-   #  result = self.testAction(infos_action["type"], difficulte)  # modifieurs testAction ?
-   #  action_function(self, **parameters)
 
   def getActions(self, type="", name="", only_names=False, with_function = False):
     """
@@ -99,7 +54,7 @@ class Personnage(Entite):
     """
     actions_job = self.job.getActions(type, name, only_names, with_function)
 
-    return actions_job + super().getActions(type, name, only_names, with_function)
+    return dict_merge(actions_job, super().getActions(type, name, only_names, with_function))
 
   def setEquipement(self, equipement, emplacement_voulu="", deux_mains=False):
     """

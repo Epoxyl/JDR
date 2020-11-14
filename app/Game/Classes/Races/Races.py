@@ -18,7 +18,7 @@ class Race():
     """
     # todo: optimiser pour une action
 
-    ret = []
+    ret = {}
     for action_name in self.actions_race.keys():
       action = self.actions_race[action_name]
       if not action["active"]:
@@ -27,13 +27,13 @@ class Race():
       if (name and name != action_name) or (type and not array_intersect(type, action["use"])):
         continue
 
-      if with_function and action_name:
+      if with_function:
         action_function = getattr(self, action_name)
-        ret.append([action_name, self, action_function])
+        ret[action_name] = [self, action_function]
       elif only_names:
-        ret.append(action_name)
+        ret[action_name] = action_name
       else:
-        ret.append(action_name if only_names else {action_name: action})
+        ret[action_name] = action
 
       if name:
         break

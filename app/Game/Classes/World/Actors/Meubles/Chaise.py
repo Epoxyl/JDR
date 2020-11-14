@@ -1,20 +1,21 @@
 from Game.Classes.World.Actors.Actor import Actor
+from Game.Classes.World.Actors.Meubles.Meuble import Meuble
 
-class Chaise(Actor):
-  position = [0, 0]
-  actions_meuble = {
+
+class Chaise(Meuble):
+  description_str = "Une chaise en bon état, elle donne envie de s'assoir dessus"
+  interactions_meuble = {
     "s_assoir": {
       "active": True
     }
   }
 
-  def s_assoir(self, Actor):
+  @staticmethod
+  def s_assoir(object, actor):
     """
-    :param joueur: Actor de l'action
+    :param Actor actor: Actor de l'action
     :return:
     """
 
-    reponse = Actor.ask("Voulez-vous vous assoir ?", ["Oui", "Non"])
-    if (reponse == 0):
-      # joueur.setPosition(self.position) todo: fonction setPosition sur Actor (et hériter ?)
-      print("Vous avez plus important à faire que vous assoir !")
+    # actor.setPosition(object.position)
+    print("Vous avez plus important à faire que vous assoir !")

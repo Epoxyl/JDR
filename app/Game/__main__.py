@@ -1,9 +1,7 @@
 from Game.Classes.Monstre import Monstre
 from Game.Classes.Personnage import Personnage
-from Game.Classes.Objet.Equipement.Epee import Epee
 from Game.Classes.Combat import Combat
-from Game.Classes.World.Actors.Meubles.Chaise import Chaise
-from Game.Levels.Prison import Prison
+from Game.Levels.Prison.Prison import Prison
 
 
 def main():
@@ -11,29 +9,35 @@ def main():
     Main program
     :return:
     """
-    print("start")
 
-    gobelin1 = Monstre("Errek", "Gobelin", "Homme")
-    gobelin1.initiative = 13
-
-    personnage = Personnage("Yohann", "Humain", "Magicien")
-    personnage2 = Personnage("2", "Elfe", "Guerrier")
-    personnage3 = Personnage("3", "Humain", "Magicien")
-
-    troupeAventuriers = [personnage, personnage2, personnage3]
-    ennemis = [gobelin1]
-
-    combat = Combat([troupeAventuriers, ennemis])
-
-    personnage.action("sortBouleDeFeu", gobelin1)
-    print(gobelin1.vie)
-    print(personnage.getActions(only_names=True, type="combat"))
+    # gobelin1 = Monstre("Errek", "Gobelin", "Homme")
+    # gobelin1.initiative = 13
+    #
+    # personnage = Personnage("Yohann", "Humain", "Magicien")
+    # personnage2 = Personnage("2", "Elfe", "Guerrier")
+    # personnage3 = Personnage("3", "Humain", "Magicien")
+    #
+    # troupeAventuriers = [personnage, personnage2, personnage3]
+    # ennemis = [gobelin1]
+    #
+    # combat = Combat([troupeAventuriers, ennemis])
+    #
+    # personnage.action("sortBouleDeFeu", gobelin1)
+    # print(gobelin1.vie)
+    # print(personnage.getActions(only_names=True, type="combat"))
     #combat.combat()
 
-    #chaise = Chaise([2,2])
-    level = Prison(7,20)
 
-    level.displayScnene()
+
+    level = Prison()
+    level.launch()
+    #chaise = Chaise([2,2])
+    #chaise.inetraction(personnage)
+
+    #scene = Chambre(7,20)
+
+    #scene.description()
+
     #epeeDebatard = Epee("Epee de batard")
 #
     #print(personnage.setEquipement(epeeDebatard))

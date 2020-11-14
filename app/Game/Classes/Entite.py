@@ -39,7 +39,7 @@ class Entite(Actor):
     module = importlib.import_module("Game.Classes.Races." + type + "." + race)
     module_class = getattr(module, race)
     self.race = module_class()
-    self.setDefaultAttack()
+    #self.setDefaultAttack()
     self.sexe = sexe
     self.type = type
     ## CES VALEURS A DETERMINER DE MANIERE ALEATOIRE

@@ -12,3 +12,18 @@ def array_intersect(array1, array2):
 
   inter = [value for value in array1 if value in array2]
   return inter
+
+def dict_merge(dict1, dict2):
+  if not isinstance(dict1, dict):
+    dict1 = [dict1]
+  if not isinstance(dict2, dict):
+    dict2 = [dict2]
+
+  return {**dict1, **dict2}
+
+def RepresentsInt(s):
+  try:
+    int(s)
+    return True
+  except ValueError:
+    return False

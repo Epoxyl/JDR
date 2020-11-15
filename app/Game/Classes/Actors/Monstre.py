@@ -1,5 +1,4 @@
-from Game.Classes.Entite import Entite
-from abc import ABC, abstractmethod
+from Game.Classes.Actors.Entite import Entite
 import importlib
 class Monstre(Entite):
   initiative = 0

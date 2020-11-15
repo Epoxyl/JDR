@@ -1,4 +1,4 @@
-from Game.Classes.World.Actors.Actor import Actor
+from Game.Classes.Actors.Actor import Actor
 from Game.Utils.Manipulations import array_intersect, dict_merge
 
 

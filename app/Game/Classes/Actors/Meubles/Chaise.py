@@ -1,8 +1,9 @@
-from Game.Classes.World.Actors.Actor import Actor
-from Game.Classes.World.Actors.Meubles.Meuble import Meuble
+from Game.Classes.Actors.Actor import Actor
+from Game.Classes.Actors.Meubles.Meuble import Meuble
 
 
 class Chaise(Meuble):
+  short_description_str = "Chaise"
   description_str = "Une chaise en bon état, elle donne envie de s'assoir dessus"
   interactions_meuble = {
     "s_assoir": {

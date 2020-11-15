@@ -1,6 +1,6 @@
-from Game.Classes.World.Actors.Actor import Actor
-from Game.Controller.UserActions import characterHUD
-from Game import game_directory
+from Game import game_directory, session
+from Game.Utils.Session import Session
+
 
 class Scene():
   """
@@ -8,6 +8,7 @@ class Scene():
   """
   hauteur = 1
   largeur = 1
+  starting_event = ""
   description_str = ""
   player = None
   name = ""
@@ -22,6 +23,8 @@ class Scene():
     self.events = events
     self.player = player
     self.name = self.__class__.__name__
+
+    self.loadEmptyMap()
 
     # todo: générateur à hauteur/largeur (par la superficie) et ennemies
 
@@ -52,7 +55,11 @@ class Scene():
     """
     if not asking_actor:
       asking_actor = self.player
-    characterHUD(self.player, self)
+    if self.starting_event:
+      server = Session.get("Server")
+      server.event(self.starting_event)
+    print("here")
+    Session.get("Server").characterHUD(self.player, self)
     return
     with open(game_directory+"/Levels/Prison/Scenes/{}_description.txt".format(self.name.lower()), 'r') as fp:
       for line in fp:
@@ -72,6 +79,22 @@ class Scene():
 
     return ret
 
+  def loadEmptyMap(self):
+    """
+    Load the empty map as list
+    :return list:
+    """
+    map_file = open(game_directory+"/Levels/Prison/Scenes/{}_map.txt".format(self.name.lower()))
+    lines = map_file.readlines()
+    self.largeur = len(lines[0])
+    self.hauteur = len(lines)
+    return [list(line) for line in lines]
+
+  def getMap(self):
+    map = self.loadEmptyMap()
+    for actor in self.actors:
+      map[actor.position[0]][actor.position[1]] = actor
+    return(map)
 
   def displayScene(self):
     """
@@ -97,7 +120,7 @@ class Scene():
       line += "|\n"
       msg += line
     msg += " " + "_" * self.largeur + "\n"
-    return (msg)
+    print (msg)
 
   def getActors(self, with_position=False, only_position=False):
     if only_position:

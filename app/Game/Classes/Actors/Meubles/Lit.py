@@ -1,4 +1,4 @@
-from Game.Classes.World.Actors.Actor import Actor
+from Game.Classes.Actors.Actor import Actor
 
 class Chaise(Actor):
   interactions_meuble = {

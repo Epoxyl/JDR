@@ -1,10 +1,6 @@
-from abc import ABC, abstractmethod
-from Game.Classes.Entite import Entite
-import Game
+from Game.Classes.Actors.Entite import Entite
 import importlib
 import random
-import json
-import os
 
 from Game.Utils.Manipulations import dict_merge
 

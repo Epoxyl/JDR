@@ -1,7 +1,5 @@
-from Game.Classes.Monstre import Monstre
-from Game.Classes.Personnage import Personnage
-from Game.Classes.Combat import Combat
-from Game.Levels.Prison.Prison import Prison
+from Game.Controller.Server import Server
+from Game.Utils.Session import Session
 
 
 def main():
@@ -28,9 +26,10 @@ def main():
     #combat.combat()
 
 
+    server = Server()
+    Session.set("Server", server)
 
-    level = Prison()
-    level.launch()
+    server.launchLevel()
     #chaise = Chaise([2,2])
     #chaise.inetraction(personnage)
 

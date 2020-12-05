@@ -14,13 +14,17 @@ class level():
     self.name = name
     self.description()
 
-  def description(self, frame=None):
+  def description(self, frame=None, with_scene=False):
     print(self.description_str)
     if frame:
-      description_label = Label(frame, text=self.description_str)
+      description = "#####################  " +self.description_str
+      if with_scene:
+        description += " - " + self.current_scene.description_str
+      description += "  #####################"
+      description_label = Label(frame, text=description)
       return description_label
 
-  def launch(self, scene_name="", player_view=None):
+  def launch(self, scene_name="", player_hud=None):
     if scene_name:
       self.current_scene_name = scene_name
 
@@ -31,3 +35,5 @@ class level():
     module_class = getattr(module, self.current_scene_name)
     self.current_scene = module_class()
     self.current_scene.description()
+
+    player_hud.loop()

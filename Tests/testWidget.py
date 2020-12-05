@@ -1,5 +1,8 @@
 from tkinter import *
+from .other_test_widget import *
 import os
+
+from .testResize import TkExample
 
 
 def ppcm(*n):
@@ -16,6 +19,48 @@ def ppcm(*n):
 def test():
   nom = "Dragomir"
   prenom="Vlad"
+
+  # class ExampleApp(Tk):
+  #   def __init__(self):
+  #     Tk.__init__(self)
+  #     t = SimpleTable(self, 10, 2)
+  #     t.pack(side="top", fill="x")
+  #     t.replace_with_entry(1,1, Button(self, text="blabla"))
+  #
+  #
+  # class SimpleTable(Frame):
+  #   def __init__(self, parent, rows=10, columns=2):
+  #     # use black background so it "peeks through" to
+  #     # form grid lines
+  #     Frame.__init__(self, parent, background="black")
+  #     self._widgets = []
+  #     for row in range(rows):
+  #       current_row = []
+  #       for column in range(columns):
+  #         label = Label(self, text="%s/%s" % (row, column),
+  #                          borderwidth=0, width=10)
+  #         label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+  #         current_row.append(label)
+  #       self._widgets.append(current_row)
+  #
+  #     for column in range(columns):
+  #       self.grid_columnconfigure(column, weight=1)
+  #
+  #   # def set(self, row, column, value):
+  #   #   widget = self._widgets[row][column]
+  #   #   widget.configure(text=value)
+  #
+  #   def replace_with_entry(self, row, column, widget):
+  #     old_widget = self._widgets[row][column]
+  #     old_widget.destroy()
+  #     entry_widget = Entry(widget)
+  #     print(entry_widget)
+  #     entry_widget.place(x=column, y=row, anchor="nw", relwidth=1.0, relheight=1.0)
+  #     entry_widget.focus_set()
+
+  # root = Tk()
+  # TkExample(root)
+  # root.mainloop()
 
   directory = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
 

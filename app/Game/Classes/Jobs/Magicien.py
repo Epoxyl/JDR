@@ -20,7 +20,7 @@ class Magicien(Job):
     
     "creerPortail": {
       "type": "INT",
-      "active": True,
+      "active": False,
       "use": [],
       "level": 0
     }

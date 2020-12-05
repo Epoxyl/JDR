@@ -29,7 +29,7 @@ def main():
     server = Server()
     Session.set("Server", server)
 
-    server.launchLevel()
+    server.launchGame()
     #chaise = Chaise([2,2])
     #chaise.inetraction(personnage)
 

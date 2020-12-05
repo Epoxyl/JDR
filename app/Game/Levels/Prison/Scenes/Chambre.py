@@ -1,11 +1,12 @@
 from Game.Classes.World.Scene import Scene
 from Game.Classes.Actors.Meubles.Chaise import Chaise
+from Game.Classes.Actors.Meubles.Lit import Lit
 from Game.Classes.Actors.Personnage import Personnage
 
 
 class Chambre(Scene):
-  hauteur = 10
-  largeur = 20
+  max_hauteur = 10
+  max_largeur = 20
   description_str = "Cellule de ???"
   starting_event = "Reveil"
 
@@ -13,6 +14,7 @@ class Chambre(Scene):
     actors = []
 
     actors.append(Chaise([2, 2]))
+    actors.append(Lit([2, 7]))
 
     personnage = Personnage("Yohann", "Humain", "Magicien",
                             position=[4, 4])  ## todo: fonction de création de personnage

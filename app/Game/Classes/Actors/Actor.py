@@ -43,7 +43,7 @@ class Actor(ABC):
     :return:
     """
 
-    Session.get("Server").askQuestion(self, msg, choix, get_choice_str, get_object)
+    Session.get("User").askQuestion(self, msg, choix, get_choice_str, get_object)
     # if (choix):
     #   if isinstance(choix, list):
     #     choix = { i : choix[i] for i in range(0, len(choix) ) }

@@ -37,7 +37,7 @@ class Entite(Actor):
     """
 
     self.nom = nom
-    module = importlib.import_module("Game.Classes.Races." + type + "." + race)
+    module = importlib.import_module("Game.Classes.Races." + race)
     module_class = getattr(module, race)
     self.race = module_class()
     #self.setDefaultAttack()

@@ -1,5 +1,4 @@
-from Game.Classes.Entite import Entite
-from abc import ABC, abstractmethod
+from Game.Classes.Actors.Entite import Entite
 import importlib
 class Monstre(Entite):
   initiative = 0
@@ -10,7 +9,7 @@ class Monstre(Entite):
     super().__init__(nom=nom, race=race, sexe=sexe, type="Mobs")
 
   def setDefaultAttack(self, defaultAttack=""):
-    actions = self.getActions(only_names=True, type="combat", name=defaultAttack)                                ####### L'ENIGME DU COMMIT
+    actions = self.getActions(only_names=True, type="combat", name=defaultAttack)
     self.defaultAttack = list(actions.keys())[0]
 
   def action(self, action_name, parameters={}):

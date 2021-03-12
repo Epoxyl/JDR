@@ -1,6 +1,7 @@
 import importlib
+from tkinter import Label
+import tkinter.font as tkFont
 
-from Game.Classes.Personnage import Personnage
 from Game.Classes.World.Scene import Scene
 
 class level():
@@ -14,19 +15,26 @@ class level():
     self.name = name
     self.description()
 
-  def description(self):
+  def description(self, frame=None, with_scene=False):
     print(self.description_str)
+    if frame:
+      description = "#####################  " +self.description_str
+      if with_scene:
+        description += " - " + self.current_scene.description_str
+      description += "  #####################"
+      description_label = Label(frame, text=description, font=tkFont.Font(family="Lucida Grande", size=15))
+      return description_label
 
-
-  def launch(self, scene_name=""):
+  def launch(self, scene_name="", player_hud=None):
     if scene_name:
       self.current_scene_name = scene_name
 
     if not self.current_scene_name in self.scenes:
       return False
 
-    print("######### {} - {} ###############".format(self.name, self.current_scene_name))
     module = importlib.import_module("Game.Levels.{}.Scenes.{}".format(self.name, self.current_scene_name))
     module_class = getattr(module, self.current_scene_name)
     self.current_scene = module_class()
     self.current_scene.description()
+
+    player_hud.loop()

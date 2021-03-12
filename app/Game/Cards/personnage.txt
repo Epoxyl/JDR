@@ -1,0 +1,8 @@
+-----------------------------------------------------------------
+Personnage:       {nom}
+Classe:       {job}
+Level:       {level}
+Age:       {age}
+actions:
+
+

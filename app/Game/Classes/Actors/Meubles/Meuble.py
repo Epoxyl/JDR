@@ -1,4 +1,4 @@
-from Game.Classes.World.Actors.Actor import Actor
+from Game.Classes.Actors.Actor import Actor
 from Game.Utils.Manipulations import array_intersect, dict_merge
 
 
@@ -38,3 +38,9 @@ class Meuble(Actor):
         break
 
     return ret
+
+  def detruire(self):
+    if self.durabilite < 0:
+      print("Vous l'avez détruit")
+    else:
+      print("Vous attaquez l'objet")

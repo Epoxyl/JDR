@@ -1,12 +1,14 @@
-from Game.Classes.World.Actors.Actor import Actor
-from Game import game_directory
+from Game import game_directory, session
+from Game.Utils.Session import Session
+
 
 class Scene():
   """
 
   """
-  hauteur = 1
-  largeur = 1
+  max_hauteur = 1
+  max_largeur = 1
+  starting_event = ""
   description_str = ""
   player = None
   name = ""
@@ -21,6 +23,8 @@ class Scene():
     self.events = events
     self.player = player
     self.name = self.__class__.__name__
+
+    self.loadEmptyMap()
 
     # todo: générateur à hauteur/largeur (par la superficie) et ennemies
 
@@ -51,25 +55,28 @@ class Scene():
     """
     if not asking_actor:
       asking_actor = self.player
+    Session.get("User").setCharacterHUD(self.player, self)
+    if self.starting_event:
+      server = Session.get("Server")
+      server.event(self.starting_event, self.player)
+    return
 
-    with open(game_directory+"/Levels/Prison/Scenes/{}_description.txt".format(self.name.lower()), 'r') as fp:
-      for line in fp:
-        if line == "\n":
-          input()
-        print(line)
+  def loadEmptyMap(self):
+    """
+    Load the empty map as list
+    :return list:
+    """
+    map_file = open(game_directory+"/Levels/Prison/Scenes/{}_map.txt".format(self.name.lower()))
+    lines = map_file.readlines()
+    self.max_largeur = max([len(line) for line in lines])
+    self.max_hauteur = len(lines)
+    return [list(line) for line in lines]
 
-    description_str = self.description_str
-    for action_name, value in self.events.items():
-      description_str += action_name + ": " + value['description'] + "\n"
-    chosen_actor_infos = self.chooseActor(asking_actor)
-    if chosen_actor_infos:
-      chosen_actor: Actor = chosen_actor_infos[1]
-      ret = chosen_actor.interaction(self.player)
-
-    self.displayScene()
-
-    return ret
-
+  def getMap(self):
+    map = self.loadEmptyMap()
+    for actor in self.actors:
+      map[actor.position[0]][actor.position[1]] = actor
+    return(map, [self.max_hauteur, self.max_largeur])
 
   def displayScene(self):
     """
@@ -81,11 +88,11 @@ class Scene():
     actors = self.listActors(with_objects=True)
     actors_by_position = {str(actor.position): actor for actor in actors.values()}
 
-    msg = " " + "_" * self.largeur + "\n"
+    msg = " " + "_" * self.max_largeur + "\n"
     line = ""
     for y in range(self.hauteur):
       line = "|"
-      for x in range(self.largeur):
+      for x in range(self.max_largeur):
         if "[{}, {}]".format(x,y) in actors_by_position.keys():
           actor = actors_by_position["[{}, {}]".format(x,y)]
           actor_name = actor.__class__.__name__
@@ -94,8 +101,8 @@ class Scene():
           line += " "
       line += "|\n"
       msg += line
-    msg += " " + "_" * self.largeur + "\n"
-    print(msg)
+    msg += " " + "_" * self.max_largeur + "\n"
+    print (msg)
 
   def getActors(self, with_position=False, only_position=False):
     if only_position:

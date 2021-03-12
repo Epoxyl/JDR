@@ -1,9 +1,10 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 import random
 import json
 import importlib
+
 from Game import game_directory
-from Game.Classes.World.Actors.Actor import Actor
+from Game.Classes.Actors.Actor import Actor
 
 class Entite(Actor):
   type = ""
@@ -36,7 +37,7 @@ class Entite(Actor):
     """
 
     self.nom = nom
-    module = importlib.import_module("Game.Classes.Races." + type + "." + race)
+    module = importlib.import_module("Game.Classes.Races." + race)
     module_class = getattr(module, race)
     self.race = module_class()
     #self.setDefaultAttack()

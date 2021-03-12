@@ -6,7 +6,7 @@ from Game.Classes.Actors.Personnage import Personnage
 
 class Chambre(Scene):
   max_hauteur = 10
-  max_largeur = 20
+  max_largeur = 20 # Supprimer
   description_str = "Cellule de ???"
   starting_event = "Reveil"
 

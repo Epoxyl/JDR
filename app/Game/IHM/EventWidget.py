@@ -1,5 +1,6 @@
 from functools import partial
 from tkinter import Frame, Label, Button, BOTH
+import tkinter.font as tkFont
 
 from Game import game_directory
 from Game.Utils.Logs import Log
@@ -37,7 +38,8 @@ class EventWidget(Frame):
     for widget in self.winfo_children():
       widget.destroy()
 
-    content = Label(self, text=self.pages[page_number])
+    
+    content = Label(self, text=self.pages[page_number], font=tkFont.Font(family="Lucida Grande", size=10))
     content.pack()
 
     if page_number >= len(self.pages)-2:

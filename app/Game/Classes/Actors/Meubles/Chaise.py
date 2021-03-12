@@ -3,6 +3,7 @@ from Game.Classes.Actors.Meubles.Meuble import Meuble
 
 
 class Chaise(Meuble):
+  durabilite = 150
   short_description_str = "Chaise"
   description_str = "Une chaise en bon état, elle donne envie de s'assoir dessus"
   interactions_meuble = {

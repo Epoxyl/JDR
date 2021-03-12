@@ -1,5 +1,6 @@
 import importlib
 from tkinter import Label
+import tkinter.font as tkFont
 
 from Game.Classes.World.Scene import Scene
 
@@ -21,7 +22,7 @@ class level():
       if with_scene:
         description += " - " + self.current_scene.description_str
       description += "  #####################"
-      description_label = Label(frame, text=description)
+      description_label = Label(frame, text=description, font=tkFont.Font(family="Lucida Grande", size=15))
       return description_label
 
   def launch(self, scene_name="", player_hud=None):

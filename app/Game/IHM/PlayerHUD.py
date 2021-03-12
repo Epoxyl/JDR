@@ -12,9 +12,10 @@ class PlayerHUD:
   def __init__(self, root):
     self.fenetre = root
     self.fenetre_width = 100
-    self.top_frame = Frame(self.fenetre)
-    self.center_frame = Frame(self.fenetre)
-    self.bottom_frame = Frame(self.fenetre)
+    self.fenetre.geometry("800x500")
+    self.top_frame = Frame(self.fenetre, borderwidth=10, relief=RIDGE)
+    self.center_frame = Frame(self.fenetre, borderwidth=10, relief=RIDGE)
+    self.bottom_frame = Frame(self.fenetre, borderwidth=10, relief=RIDGE)
 
   def loop(self):
     self.fenetre.mainloop()  # Lancement de la boucle principale
@@ -22,9 +23,9 @@ class PlayerHUD:
   def showHUD(self):
     # self.fenetre.geometry("600x800")
     # self.fenetre.update()
-    self.top_frame.pack(fill=BOTH)
-    self.center_frame.pack(fill=BOTH)
-    self.bottom_frame.pack(fill=BOTH)
+    self.top_frame.pack(fill=X)
+    self.center_frame.pack(fill=BOTH, expand=YES)
+    self.bottom_frame.pack(fill=X, side=BOTTOM)
 
   # Affichage de l'évènement
   def showEvent(self, event_name, level_name, callback):
@@ -43,7 +44,7 @@ class PlayerHUD:
   def setSceneMap(self, map_infos, player):
     self.cleanFrame(self.center_frame)
     # self.center_object = MapWidget(self.center_frame, map_infos, player)
-    MapWidget(self.center_frame, map_infos, player).pack()
+    MapWidget(self.center_frame, map_infos, player).pack(fill=BOTH, expand=YES)
 
   # Affichage d'une card
   def setCard(self, card_name, variable, frame):

@@ -1,6 +1,6 @@
 from functools import partial
 import importlib
-from Game.IHM.User import User
+from Game.Controller.User import User
 from Game.Utils.Session import Session
 
 class Server():

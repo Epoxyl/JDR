@@ -38,3 +38,9 @@ class Meuble(Actor):
         break
 
     return ret
+
+  def detruire(self):
+    if self.durabilite < 0:
+      print("Vous l'avez détruit")
+    else:
+      print("Vous attaquez l'objet")

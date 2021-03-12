@@ -1,4 +1,7 @@
+from Game.Classes.Actors.Meubles.Chaise import Chaise
+from Game.Classes.Actors.Personnage import Personnage
 from Game.Controller.Server import Server
+from Game.Levels.Prison.Scenes.Chambre import Chambre
 from Game.Utils.Session import Session
 
 
@@ -25,6 +28,8 @@ def main():
     # print(personnage.getActions(only_names=True, type="combat"))
     #combat.combat()
 
+    personnage = Personnage()
+    print(personnage.__str__())
 
     server = Server()
     Session.set("Server", server)
